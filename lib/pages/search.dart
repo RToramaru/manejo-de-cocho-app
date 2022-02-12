@@ -78,20 +78,23 @@ class SearchPageState extends State<SearchPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     if (cocho != "") ...[
-                      if (registros[0].porcentagem <= 5) ...[
+                      if (double.parse(registros[0].porcentagem) <= 5) ...[
                         Text(
                             'Colocar ' +
-                                registros[0].quantInicial.toString() +
+                                registros[0].quantInicial +
                                 ' de alimento',
                             style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold)),
-                      ] else if (registros[0].porcentagem == 0) ...[
+                      ] else if (double.parse(registros[0].porcentagem) ==
+                          0) ...[
                         Text(
                             'Colocar ' +
-                                (registros[0].quantInicial +
-                                        registros[0].quantInicial *
+                                (double.parse(registros[0].quantInicial) +
+                                        double.parse(
+                                                registros[0].quantInicial) *
                                             0.1 *
-                                            registros[0].porcentagem)
+                                            double.parse(
+                                                registros[0].porcentagem))
                                     .toString() +
                                 ' de alimento',
                             style: const TextStyle(
@@ -99,10 +102,12 @@ class SearchPageState extends State<SearchPage> {
                       ] else ...[
                         Text(
                             'Colocar ' +
-                                (registros[0].quantInicial -
-                                        registros[0].quantInicial *
+                                (double.parse(registros[0].quantInicial) -
+                                        double.parse(
+                                                registros[0].quantInicial) *
                                             0.1 *
-                                            registros[0].porcentagem)
+                                            double.parse(
+                                                registros[0].porcentagem))
                                     .toString() +
                                 ' de alimento',
                             style: const TextStyle(
@@ -128,18 +133,11 @@ class SearchPageState extends State<SearchPage> {
                           style: const TextStyle(fontSize: 20)),
                       Text('Identificador do cocho: ' + registros[0].cocho,
                           style: const TextStyle(fontSize: 20)),
-                      Text(
-                          'Quantidade Inicial: ' +
-                              registros[0].quantInicial.toString(),
+                      Text('Quantidade Inicial: ' + registros[0].quantInicial,
                           style: const TextStyle(fontSize: 20)),
-                      Text(
-                          'Quantidade Final: ' +
-                              registros[0].quantFinal.toString(),
+                      Text('Quantidade Final: ' + registros[0].quantFinal,
                           style: const TextStyle(fontSize: 20)),
-                      Text(
-                          'Porcentagem: ' +
-                              registros[0].porcentagem.toString() +
-                              '%',
+                      Text('Porcentagem: ' + registros[0].porcentagem + '%',
                           style: const TextStyle(fontSize: 20)),
                       Text('Data: ' + registros[0].data,
                           style: const TextStyle(fontSize: 20))

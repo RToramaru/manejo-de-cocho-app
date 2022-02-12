@@ -1,9 +1,9 @@
 class Registro {
   late String aluno;
   late String cocho;
-  late double quantInicial;
-  late double quantFinal;
-  late double porcentagem;
+  late String quantInicial;
+  late String quantFinal;
+  late String porcentagem;
   late String data;
 
   Registro(this.aluno, this.cocho, this.quantInicial, this.quantFinal,
@@ -24,7 +24,7 @@ class Registro {
   Registro.fromMap(Map<String, dynamic> map) {
     aluno = map['aluno'];
     cocho = map['cocho'];
-    quantInicial = map['quant_inicial'];
+    quantInicial = map["quant_inicial"];
     quantFinal = map['quant_final'];
     porcentagem = map['porcentagem'];
     data = map['data'];

@@ -15,9 +15,9 @@ class CalculatePage extends StatefulWidget {
 class CalculatePageState extends State<CalculatePage> {
   late String aluno;
   late String cocho;
-  late double quantInicial;
-  late double quantFinal;
-  late double porcentagem;
+  late String quantInicial;
+  late String quantFinal;
+  late String porcentagem;
   late String data;
   String text = '';
   final fieldTextAluno = TextEditingController();
@@ -109,8 +109,8 @@ class CalculatePageState extends State<CalculatePage> {
                       child: TextField(
                         onChanged: (quantInicialText) {
                           try {
-                            quantInicial = double.parse(
-                                quantInicialText.replaceAll(',', '.'));
+                            quantInicial =
+                                quantInicialText.replaceAll(',', '.');
                             // ignore: empty_catches
                           } catch (e) {}
                         },
@@ -136,8 +136,7 @@ class CalculatePageState extends State<CalculatePage> {
                       child: TextField(
                         onChanged: (quantFinalText) {
                           try {
-                            quantFinal = double.parse(
-                                quantFinalText.replaceAll(',', '.'));
+                            quantFinal = quantFinalText.replaceAll(',', '.');
                             // ignore: empty_catches
                           } catch (e) {}
                         },
@@ -161,18 +160,17 @@ class CalculatePageState extends State<CalculatePage> {
                       child: ElevatedButton(
                         onPressed: () {
                           setState(() {
-                            porcentagem = (100 * quantFinal) / quantInicial;
-                            String porcentagemString =
-                                porcentagem.toStringAsFixed(2);
+                            double porcent = (100 * double.parse(quantFinal)) /
+                                double.parse(quantInicial);
+                            String porcentagem = porcent.toStringAsFixed(2);
                             text = "A porcentagem que restou \n"
-                                "foi de $porcentagemString% \n"
+                                "foi de $porcentagem% \n"
                                 "Para o proximo abastecimento \n"
                                 "colocar ";
                           });
-                          porcentagem = (100 * quantFinal) / quantInicial;
-                          String porcentagemString =
-                              porcentagem.toStringAsFixed(2);
-                          porcentagem = double.parse(porcentagemString);
+                          double porcent = (100 * double.parse(quantFinal)) /
+                              double.parse(quantInicial);
+                          String porcentagem = porcent.toStringAsFixed(2);
                           DateTime d = DateTime.now();
                           data = d.toString();
                           Registro r = Registro(aluno, cocho, quantInicial,

@@ -40,13 +40,17 @@ class DatabaseHelper {
 
   void _createDb(Database db, int newVersion) async {
     await db.execute(
-        'CREATE TABLE IF NOT EXISTS $registroTable($colAluno TEXT, $colCocho TEXT, $colData TEXT, $colQuantInicial real, $colQuantFinal real, $colPorcentagem real, PRIMARY KEY($colAluno, $colCocho, $colData, $colQuantInicial, $colQuantFinal, $colPorcentagem) );');
+        'CREATE TABLE IF NOT EXISTS $registroTable($colAluno TEXT, $colCocho TEXT, $colData TEXT, $colQuantInicial TEXT, $colQuantFinal TEXT, $colPorcentagem TEXT, PRIMARY KEY($colAluno, $colCocho, $colData, $colQuantInicial, $colQuantFinal, $colPorcentagem) );');
   }
 
   Future<int> insertRegistro(Registro registro) async {
-    Database db = await database;
-    var result = await db.insert(registroTable, registro.toMap());
-    return result;
+    try {
+      Database db = await database;
+      var result = await db.insert(registroTable, registro.toMap());
+      return result;
+      // ignore: empty_catches
+    } catch (e) {}
+    return 0;
   }
 
   Future<Registro?> getRegistro(String cocho) async {

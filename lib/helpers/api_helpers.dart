@@ -11,15 +11,18 @@ class ApiHelpers {
   }
 
   static Future send(dynamic registro) async {
-    var url =
-        Uri.parse('https://api-rest-leitura-cocho.herokuapp.com/api/registro');
-    var _body = json.encode(registro);
-    await http.post(
-      url,
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: _body,
-    );
+    try {
+      var url = Uri.parse(
+          'https://api-rest-leitura-cocho.herokuapp.com/api/registro');
+      var _body = json.encode(registro);
+      await http.post(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: _body,
+      );
+      // ignore: empty_catches
+    } catch (e) {}
   }
 }

@@ -1,9 +1,9 @@
 class Cocho {
   String? aluno;
   String? cocho;
-  double? qauntInical;
-  double? quantFinal;
-  double? porcentagem;
+  String? qauntInical;
+  String? quantFinal;
+  String? porcentagem;
   String? data;
 
   Cocho(

@@ -104,12 +104,9 @@ class SetttingPageState extends State<SetttingPage> {
                             var item = response[i] as Map;
                             String aluno = item['aluno'];
                             String cocho = item['cocho'];
-                            double quantInicial =
-                                double.parse(item['quant_inicial']);
-                            double quantFinal =
-                                double.parse(item['quant_final']);
-                            double porcentagem =
-                                double.parse(item['porcentagem']);
+                            String quantInicial = item['quant_inicial'];
+                            String quantFinal = item['quant_final'];
+                            String porcentagem = item['porcentagem'];
                             String data = item['data'];
 
                             Registro r = Registro(aluno, cocho, quantInicial,

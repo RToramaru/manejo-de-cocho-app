@@ -65,15 +65,15 @@ class HistoryPageState extends State<HistoryPage> {
                               style: const TextStyle(fontSize: 20)),
                           Text(
                               'Quantidade Inicial: ' +
-                                  registros[index].quantInicial.toString(),
+                                  registros[index].quantInicial,
                               style: const TextStyle(fontSize: 20)),
                           Text(
                               'Quantidade Final: ' +
-                                  registros[index].quantFinal.toString(),
+                                  registros[index].quantFinal,
                               style: const TextStyle(fontSize: 20)),
                           Text(
                               'Porcentagem: ' +
-                                  registros[index].porcentagem.toString() +
+                                  registros[index].porcentagem +
                                   '%',
                               style: const TextStyle(fontSize: 20)),
                           Text('Data: ' + registros[index].data,
@@ -86,9 +86,9 @@ class HistoryPageState extends State<HistoryPage> {
   }
 
   _escolheCor(int index) {
-    if (registros[index].porcentagem == 0) {
+    if (double.parse(registros[index].porcentagem) == 0) {
       return const Color.fromARGB(255, 238, 164, 159);
-    } else if (registros[index].porcentagem <= 5) {
+    } else if (double.parse(registros[index].porcentagem) <= 5) {
       return const Color.fromARGB(255, 147, 231, 149);
     } else {
       return const Color.fromARGB(255, 236, 229, 163);
