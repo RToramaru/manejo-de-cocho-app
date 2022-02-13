@@ -23,8 +23,8 @@ class SearchPageState extends State<SearchPage> {
     super.initState();
   }
 
-  bool pesquisa(String id) {
-    db.getRegistrosCocho(id).then((lista) {
+  Future<bool> pesquisa(String id) async {
+    await db.getRegistrosCocho(id).then((lista) {
       setState(() {
         registros = lista;
       });
@@ -60,9 +60,11 @@ class SearchPageState extends State<SearchPage> {
                   IconButton(
                     icon: const Icon(Icons.search),
                     tooltip: 'Pesquisar',
-                    onPressed: () {
+                    onPressed: () async {
+                      // ignore: await_only_futures
+                      bool valido = await pesquisa(cocho);
                       setState(() {
-                        encontrado = pesquisa(cocho);
+                        encontrado = valido;
                       });
                     },
                   ),
