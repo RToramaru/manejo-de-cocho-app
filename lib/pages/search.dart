@@ -63,9 +63,6 @@ class SearchPageState extends State<SearchPage> {
                     onPressed: () {
                       setState(() {
                         encontrado = pesquisa(cocho);
-                        if (!encontrado) {
-                          cocho = "";
-                        }
                       });
                     },
                   ),
@@ -77,7 +74,7 @@ class SearchPageState extends State<SearchPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    if (cocho != "") ...[
+                    if (encontrado) ...[
                       if (double.parse(registros[0].porcentagem) <= 5) ...[
                         Text(
                             'Colocar ' +
