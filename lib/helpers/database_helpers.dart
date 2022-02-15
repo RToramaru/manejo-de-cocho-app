@@ -77,7 +77,7 @@ class DatabaseHelper {
 
   Future<List<Registro>> getRegistros() async {
     Database db = await database;
-    var result = await db.query(registroTable);
+    var result = await db.query('$registroTable ORDER BY $colData DESC;');
 
     List<Registro> lista = result.isNotEmpty
         ? result.map((e) => Registro.fromMap(e)).toList()
