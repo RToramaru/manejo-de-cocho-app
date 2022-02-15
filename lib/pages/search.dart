@@ -91,9 +91,7 @@ class SearchPageState extends State<SearchPage> {
                                 (double.parse(registros[0].quantInicial) +
                                         double.parse(
                                                 registros[0].quantInicial) *
-                                            0.1 *
-                                            double.parse(
-                                                registros[0].porcentagem))
+                                            0.1)
                                     .toString() +
                                 ' kg de alimento',
                             style: const TextStyle(
@@ -104,9 +102,7 @@ class SearchPageState extends State<SearchPage> {
                                 (double.parse(registros[0].quantInicial) -
                                         double.parse(
                                                 registros[0].quantInicial) *
-                                            0.1 *
-                                            double.parse(
-                                                registros[0].porcentagem))
+                                            0.1)
                                     .toString() +
                                 ' kg de alimento',
                             style: const TextStyle(
