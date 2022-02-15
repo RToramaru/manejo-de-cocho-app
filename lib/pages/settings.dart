@@ -32,8 +32,9 @@ class SetttingPageState extends State<SetttingPage> {
     });
   }
 
-  void insertRegistro(Registro r) {
-    db.insertRegistro(r);
+  Future<int> insertRegistro(Registro r) async {
+    var result = await db.insertRegistro(r);
+    return result;
   }
 
   _showToast() {
@@ -60,18 +61,6 @@ class SetttingPageState extends State<SetttingPage> {
       gravity: ToastGravity.BOTTOM,
       toastDuration: const Duration(seconds: 2),
     );
-
-    // Custom Toast Position
-    fToast.showToast(
-        child: toast,
-        toastDuration: const Duration(seconds: 2),
-        positionedToastBuilder: (context, child) {
-          return Positioned(
-            child: child,
-            top: 16.0,
-            left: 16.0,
-          );
-        });
   }
 
   @override
@@ -87,7 +76,7 @@ class SetttingPageState extends State<SetttingPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const Text(
-                      'Enviar dados',
+                      'Atualizar dados',
                       style: TextStyle(fontSize: 20),
                     ),
                     IconButton(
@@ -111,7 +100,7 @@ class SetttingPageState extends State<SetttingPage> {
 
                             Registro r = Registro(aluno, cocho, quantInicial,
                                 quantFinal, porcentagem, data);
-                            insertRegistro(r);
+                            var result = await insertRegistro(r);
                           }
                         } catch (e) {
                           registros;
