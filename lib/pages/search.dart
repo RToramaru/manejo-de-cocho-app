@@ -77,22 +77,22 @@ class SearchPageState extends State<SearchPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     if (encontrado) ...[
-                      if (double.parse(registros[0].porcentagem) <= 5) ...[
-                        Text(
-                            'Colocar ' +
-                                registros[0].quantInicial +
-                                ' kg de alimento',
-                            style: const TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold)),
-                      ] else if (double.parse(registros[0].porcentagem) ==
-                          0) ...[
+                      if (double.parse(registros[0].porcentagem) == 0) ...[
                         Text(
                             'Colocar ' +
                                 (double.parse(registros[0].quantInicial) +
-                                        double.parse(
+                                        (double.parse(
                                                 registros[0].quantInicial) *
-                                            0.1)
-                                    .toString() +
+                                            0.1))
+                                    .toStringAsFixed(2) +
+                                ' kg de alimento',
+                            style: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold)),
+                      ] else if (double.parse(registros[0].porcentagem) <=
+                          5) ...[
+                        Text(
+                            'Colocar ' +
+                                registros[0].quantInicial +
                                 ' kg de alimento',
                             style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold)),
@@ -100,10 +100,10 @@ class SearchPageState extends State<SearchPage> {
                         Text(
                             'Colocar ' +
                                 (double.parse(registros[0].quantInicial) -
-                                        double.parse(
+                                        (double.parse(
                                                 registros[0].quantInicial) *
-                                            0.1)
-                                    .toString() +
+                                            0.1))
+                                    .toStringAsFixed(2) +
                                 ' kg de alimento',
                             style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold)),
