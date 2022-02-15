@@ -163,10 +163,32 @@ class CalculatePageState extends State<CalculatePage> {
                             double porcent = (100 * double.parse(quantFinal)) /
                                 double.parse(quantInicial);
                             String porcentagem = porcent.toStringAsFixed(2);
-                            text = "A porcentagem que restou \n"
-                                "foi de $porcentagem% \n"
-                                "Para o proximo abastecimento \n"
-                                "colocar ";
+                            if (double.parse(porcentagem) == 0) {
+                              double valor = double.parse(quantInicial) +
+                                  double.parse(quantInicial) * 0.1;
+                              text = "A porcentagem que restou \n"
+                                      "foi de $porcentagem% \n"
+                                      "Para o proximo abastecimento \n"
+                                      "colocar " +
+                                  valor.toString() +
+                                  " kg";
+                            } else if (double.parse(porcentagem) <= 5) {
+                              text = "A porcentagem que restou \n"
+                                      "foi de $porcentagem% \n"
+                                      "Para o proximo abastecimento \n"
+                                      "colocar " +
+                                  quantInicial +
+                                  " kg";
+                            } else {
+                              double valor = double.parse(quantInicial) -
+                                  double.parse(quantInicial) * 0.1;
+                              text = "A porcentagem que restou \n"
+                                      "foi de $porcentagem% \n"
+                                      "Para o proximo abastecimento \n"
+                                      "colocar " +
+                                  valor.toString() +
+                                  " kg";
+                            }
                           });
                           double porcent = (100 * double.parse(quantFinal)) /
                               double.parse(quantInicial);

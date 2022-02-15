@@ -77,7 +77,39 @@ class HistoryPageState extends State<HistoryPage> {
                                   '%',
                               style: const TextStyle(fontSize: 20)),
                           Text('Data: ' + registros[index].data,
-                              style: const TextStyle(fontSize: 20))
+                              style: const TextStyle(fontSize: 20)),
+                          if (double.parse(registros[index].porcentagem) ==
+                              0) ...[
+                            Text(
+                                'Próximo abastecimento: ' +
+                                    (double.parse(
+                                                registros[index].quantInicial) +
+                                            double.parse(registros[index]
+                                                    .quantInicial) *
+                                                0.1)
+                                        .toString() +
+                                    " kg",
+                                style: const TextStyle(fontSize: 20)),
+                          ] else if (double.parse(
+                                  registros[index].porcentagem) <=
+                              5) ...[
+                            Text(
+                                'Próximo abastecimento: ' +
+                                    registros[index].quantInicial +
+                                    " kg",
+                                style: const TextStyle(fontSize: 20)),
+                          ] else ...[
+                            Text(
+                                'Próximo abastecimento: ' +
+                                    (double.parse(
+                                                registros[index].quantInicial) -
+                                            double.parse(registros[index]
+                                                    .quantInicial) *
+                                                0.1)
+                                        .toString() +
+                                    " kg",
+                                style: const TextStyle(fontSize: 20)),
+                          ]
                         ],
                       ))
                 ],

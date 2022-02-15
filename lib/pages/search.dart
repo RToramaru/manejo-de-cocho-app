@@ -81,7 +81,7 @@ class SearchPageState extends State<SearchPage> {
                         Text(
                             'Colocar ' +
                                 registros[0].quantInicial +
-                                ' de alimento',
+                                ' kg de alimento',
                             style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold)),
                       ] else if (double.parse(registros[0].porcentagem) ==
@@ -95,7 +95,7 @@ class SearchPageState extends State<SearchPage> {
                                             double.parse(
                                                 registros[0].porcentagem))
                                     .toString() +
-                                ' de alimento',
+                                ' kg de alimento',
                             style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold)),
                       ] else ...[
@@ -108,7 +108,7 @@ class SearchPageState extends State<SearchPage> {
                                             double.parse(
                                                 registros[0].porcentagem))
                                     .toString() +
-                                ' de alimento',
+                                ' kg de alimento',
                             style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold)),
                       ],
@@ -132,9 +132,15 @@ class SearchPageState extends State<SearchPage> {
                           style: const TextStyle(fontSize: 20)),
                       Text('Identificador do cocho: ' + registros[0].cocho,
                           style: const TextStyle(fontSize: 20)),
-                      Text('Quantidade Inicial: ' + registros[0].quantInicial,
+                      Text(
+                          'Quantidade Inicial: ' +
+                              registros[0].quantInicial +
+                              " kg",
                           style: const TextStyle(fontSize: 20)),
-                      Text('Quantidade Final: ' + registros[0].quantFinal,
+                      Text(
+                          'Quantidade Final: ' +
+                              registros[0].quantFinal +
+                              " kg",
                           style: const TextStyle(fontSize: 20)),
                       Text('Porcentagem: ' + registros[0].porcentagem + '%',
                           style: const TextStyle(fontSize: 20)),
