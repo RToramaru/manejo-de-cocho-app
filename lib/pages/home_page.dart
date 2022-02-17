@@ -12,13 +12,17 @@ class HomePage extends StatefulWidget {
 class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.green,
-          child: const Icon(Icons.login),
-          onPressed: () {
-            Navigator.of(context).pushReplacementNamed('/calculate');
-          }),
+    return GestureDetector(
+      onVerticalDragEnd: (details) =>
+          Navigator.of(context).pushReplacementNamed('/calculate'),
+      child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+            backgroundColor: Colors.green,
+            child: const Icon(Icons.login),
+            onPressed: () {
+              Navigator.of(context).pushReplacementNamed('/calculate');
+            }),
+      ),
     );
   }
 }
