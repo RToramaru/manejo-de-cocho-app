@@ -67,7 +67,7 @@ class CalculatePageState extends State<CalculatePage> {
                       },
                       keyboardType: TextInputType.text,
                       decoration: InputDecoration(
-                          labelText: 'Aluno',
+                          labelText: 'Tratador',
                           enabledBorder: OutlineInputBorder(
                               borderSide: const BorderSide(
                                   width: 3, color: Colors.blue),
@@ -157,50 +157,85 @@ class CalculatePageState extends State<CalculatePage> {
                     ),
                     SizedBox(
                       width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
+                      child: Container(
+                        margin: const EdgeInsets.only(
+                          top: 10,
+                        ),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              double porcent =
+                                  (100 * double.parse(quantFinal)) /
+                                      double.parse(quantInicial);
+                              String porcentagem = porcent.toStringAsFixed(2);
+                              if (double.parse(porcentagem) >= 0 &&
+                                  double.parse(porcentagem) <= 2.5) {
+                                double valor = double.parse(quantInicial) +
+                                    double.parse(quantInicial) * 0.1;
+                                text = "A porcentagem que restou \n"
+                                        "foi de $porcentagem% \n"
+                                        "Para o proximo abastecimento \n"
+                                        "colocar " +
+                                    valor.toString() +
+                                    " kg";
+                              } else if (double.parse(porcentagem) > 2.5 &&
+                                  double.parse(porcentagem) <= 5) {
+                                double valor = double.parse(quantInicial) +
+                                    double.parse(quantInicial) * 0.05;
+                                text = "A porcentagem que restou \n"
+                                        "foi de $porcentagem% \n"
+                                        "Para o proximo abastecimento \n"
+                                        "colocar " +
+                                    valor.toString() +
+                                    " kg";
+                              } else if (double.parse(porcentagem) > 5 &&
+                                  double.parse(porcentagem) <= 10) {
+                                text = "A porcentagem que restou \n"
+                                        "foi de $porcentagem% \n"
+                                        "Para o proximo abastecimento \n"
+                                        "colocar " +
+                                    quantInicial +
+                                    " kg";
+                              } else if (double.parse(porcentagem) > 10 &&
+                                  double.parse(porcentagem) <= 15) {
+                                double valor = double.parse(quantInicial) -
+                                    double.parse(quantInicial) * 0.05;
+                                text = "A porcentagem que restou \n"
+                                        "foi de $porcentagem% \n"
+                                        "Para o proximo abastecimento \n"
+                                        "colocar " +
+                                    valor.toString() +
+                                    " kg";
+                              } else if (double.parse(porcentagem) >= 15) {
+                                double valor = double.parse(quantInicial) -
+                                    double.parse(quantInicial) * 0.1;
+                                text = "A porcentagem que restou \n"
+                                        "foi de $porcentagem% \n"
+                                        "Para o proximo abastecimento \n"
+                                        "colocar " +
+                                    valor.toString() +
+                                    " kg";
+                              }
+                            });
                             double porcent = (100 * double.parse(quantFinal)) /
                                 double.parse(quantInicial);
                             String porcentagem = porcent.toStringAsFixed(2);
-                            if (double.parse(porcentagem) == 0) {
-                              double valor = double.parse(quantInicial) +
-                                  double.parse(quantInicial) * 0.1;
-                              text = "A porcentagem que restou \n"
-                                      "foi de $porcentagem% \n"
-                                      "Para o proximo abastecimento \n"
-                                      "colocar " +
-                                  valor.toString() +
-                                  " kg";
-                            } else if (double.parse(porcentagem) <= 5) {
-                              text = "A porcentagem que restou \n"
-                                      "foi de $porcentagem% \n"
-                                      "Para o proximo abastecimento \n"
-                                      "colocar " +
-                                  quantInicial +
-                                  " kg";
-                            } else {
-                              double valor = double.parse(quantInicial) -
-                                  double.parse(quantInicial) * 0.1;
-                              text = "A porcentagem que restou \n"
-                                      "foi de $porcentagem% \n"
-                                      "Para o proximo abastecimento \n"
-                                      "colocar " +
-                                  valor.toString() +
-                                  " kg";
-                            }
-                          });
-                          double porcent = (100 * double.parse(quantFinal)) /
-                              double.parse(quantInicial);
-                          String porcentagem = porcent.toStringAsFixed(2);
-                          DateTime d = DateTime.now();
-                          data = d.toString();
-                          Registro r = Registro(aluno, cocho, quantInicial,
-                              quantFinal, porcentagem, data);
-                          insertRegistro(r);
-                          clearText();
-                        },
-                        child: const Text('Calcular'),
+                            DateTime d = DateTime.now();
+                            data = d.toString();
+                            Registro r = Registro(aluno, cocho, quantInicial,
+                                quantFinal, porcentagem, data);
+                            insertRegistro(r);
+                            clearText();
+                          },
+                          child: const Text('Calcular'),
+                          style: ElevatedButton.styleFrom(
+                            fixedSize: const Size(100, 50),
+                            primary: Colors.green,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                     Text(

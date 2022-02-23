@@ -45,76 +45,102 @@ class HistoryPageState extends State<HistoryPage> {
   }
 
   _listaRegistros(BuildContext context, int index) {
-    return GestureDetector(
-      child: Card(
-          color: _escolheCor(index),
-          child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Row(
-                children: <Widget>[
-                  Padding(
-                      padding: const EdgeInsets.only(left: 10.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text('Aluno: ' + registros[index].aluno,
-                              style: const TextStyle(fontSize: 20)),
+    return Card(
+        color: _escolheCor(index),
+        child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              children: <Widget>[
+                Padding(
+                    padding: const EdgeInsets.only(left: 10.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text('Tratador: ' + registros[index].aluno,
+                            style: const TextStyle(fontSize: 20)),
+                        Text(
+                            'Identificador do cocho: ' + registros[index].cocho,
+                            style: const TextStyle(fontSize: 20)),
+                        Text(
+                            'Quantidade Inicial: ' +
+                                registros[index].quantInicial +
+                                ' kg',
+                            style: const TextStyle(fontSize: 20)),
+                        Text(
+                            'Quantidade Final: ' +
+                                registros[index].quantFinal +
+                                ' kg',
+                            style: const TextStyle(fontSize: 20)),
+                        Text(
+                            'Porcentagem: ' +
+                                registros[index].porcentagem +
+                                '%',
+                            style: const TextStyle(fontSize: 20)),
+                        Text('Data: ' + registros[index].data,
+                            style: const TextStyle(fontSize: 20)),
+                        if (double.parse(registros[index].porcentagem) >= 0 &&
+                            double.parse(registros[index].porcentagem) <=
+                                2.5) ...[
                           Text(
-                              'Identificador do cocho: ' +
-                                  registros[index].cocho,
+                              'Próximo abastecimento: ' +
+                                  (double.parse(registros[index].quantInicial) +
+                                          double.parse(registros[index]
+                                                  .quantInicial) *
+                                              0.1)
+                                      .toStringAsFixed(2) +
+                                  " kg",
                               style: const TextStyle(fontSize: 20)),
+                        ] else if (double.parse(registros[index].porcentagem) >
+                                2.5 &&
+                            double.parse(registros[index].porcentagem) <=
+                                5) ...[
                           Text(
-                              'Quantidade Inicial: ' +
-                                  registros[index].quantInicial,
+                              'Próximo abastecimento: ' +
+                                  (double.parse(registros[index].quantInicial) +
+                                          double.parse(registros[index]
+                                                  .quantInicial) *
+                                              0.05)
+                                      .toStringAsFixed(2) +
+                                  " kg",
                               style: const TextStyle(fontSize: 20)),
+                        ] else if (double.parse(registros[index].porcentagem) >
+                                5 &&
+                            double.parse(registros[index].porcentagem) <=
+                                10) ...[
                           Text(
-                              'Quantidade Final: ' +
-                                  registros[index].quantFinal,
+                              'Próximo abastecimento: ' +
+                                  registros[index].quantInicial +
+                                  " kg",
                               style: const TextStyle(fontSize: 20)),
+                        ] else if (double.parse(registros[index].porcentagem) >
+                                10 &&
+                            double.parse(registros[index].porcentagem) <=
+                                15) ...[
                           Text(
-                              'Porcentagem: ' +
-                                  registros[index].porcentagem +
-                                  '%',
+                              'Próximo abastecimento: ' +
+                                  (double.parse(registros[index].quantInicial) -
+                                          double.parse(registros[index]
+                                                  .quantInicial) *
+                                              0.05)
+                                      .toStringAsFixed(2) +
+                                  " kg",
                               style: const TextStyle(fontSize: 20)),
-                          Text('Data: ' + registros[index].data,
+                        ] else if (double.parse(registros[index].porcentagem) >
+                            15) ...[
+                          Text(
+                              'Próximo abastecimento: ' +
+                                  (double.parse(registros[index].quantInicial) -
+                                          double.parse(registros[index]
+                                                  .quantInicial) *
+                                              0.1)
+                                      .toStringAsFixed(2) +
+                                  " kg",
                               style: const TextStyle(fontSize: 20)),
-                          if (double.parse(registros[index].porcentagem) ==
-                              0) ...[
-                            Text(
-                                'Próximo abastecimento: ' +
-                                    (double.parse(
-                                                registros[index].quantInicial) +
-                                            double.parse(registros[index]
-                                                    .quantInicial) *
-                                                0.1)
-                                        .toString() +
-                                    " kg",
-                                style: const TextStyle(fontSize: 20)),
-                          ] else if (double.parse(
-                                  registros[index].porcentagem) <=
-                              5) ...[
-                            Text(
-                                'Próximo abastecimento: ' +
-                                    registros[index].quantInicial +
-                                    " kg",
-                                style: const TextStyle(fontSize: 20)),
-                          ] else ...[
-                            Text(
-                                'Próximo abastecimento: ' +
-                                    (double.parse(
-                                                registros[index].quantInicial) -
-                                            double.parse(registros[index]
-                                                    .quantInicial) *
-                                                0.1)
-                                        .toString() +
-                                    " kg",
-                                style: const TextStyle(fontSize: 20)),
-                          ]
-                        ],
-                      ))
-                ],
-              ))),
-    );
+                        ]
+                      ],
+                    ))
+              ],
+            )));
   }
 
   _escolheCor(int index) {
