@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:draw_graph/draw_graph.dart';
 import 'package:draw_graph/models/feature.dart';
 import 'package:flutter/material.dart';
