@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:leitura_cocho/helpers/api_helpers.dart';
-import '../helpers/database_helpers.dart';
-import '../models/registro.dart';
-import 'list_tile_custom.dart';
+import 'package:leitura_cocho/helpers/database_helpers.dart';
+import 'package:leitura_cocho/models/registro.dart';
+import 'package:leitura_cocho/pages/list_tile_custom.dart';
 
 class SetttingPage extends StatefulWidget {
   const SetttingPage({Key? key}) : super(key: key);

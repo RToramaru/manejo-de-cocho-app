@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:leitura_cocho/models/registro.dart';
-import '../helpers/database_helpers.dart';
-import 'list_tile_custom.dart';
+import 'package:leitura_cocho/helpers/database_helpers.dart';
+import 'package:leitura_cocho/pages/list_tile_custom.dart';
 
 class CalculatePage extends StatefulWidget {
   const CalculatePage({Key? key}) : super(key: key);

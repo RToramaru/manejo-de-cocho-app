@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:leitura_cocho/pages/search.dart';
 import 'package:leitura_cocho/pages/settings.dart';
-
-import 'calculate.dart';
-import 'history_page.dart';
-import 'home_page.dart';
+import 'package:leitura_cocho/pages/calculate.dart';
+import 'package:leitura_cocho/pages/graph-page.dart';
+import 'package:leitura_cocho/pages/history_page.dart';
+import 'package:leitura_cocho/pages/home_page.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({Key? key}) : super(key: key);
@@ -19,6 +19,7 @@ class AppWidget extends StatelessWidget {
         '/calculate': (context) => const CalculatePage(),
         '/history': (context) => const HistoryPage(),
         '/settings': (context) => const SetttingPage(),
+        '/graph': (context) => const GraphPage(),
       },
     );
   }

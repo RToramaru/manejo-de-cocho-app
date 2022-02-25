@@ -46,10 +46,17 @@ class ListTileCustom extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.settings),
-            title: const Text('Ajustes'),
+            leading: const Icon(Icons.send),
+            title: const Text('Salvar Dados'),
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/settings');
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.auto_graph),
+            title: const Text('Gráficos'),
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed('/graph');
             },
           ),
         ],

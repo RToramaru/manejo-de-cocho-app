@@ -104,9 +104,25 @@ class DatabaseHelper {
 
   Future<List<Registro>> getRegistrosAluno(String aluno) async {
     Database db = await database;
-    var result = await db.query(
-        '$registroTable WHERE $colAluno = "$aluno" ORDER BY $colData DESC;');
+    try {
+      var result = await db.query(
+          '$registroTable WHERE $colAluno = "$aluno" ORDER BY $colData DESC;');
 
+      List<Registro> lista = result.isNotEmpty
+          ? result.map((e) => Registro.fromMap(e)).toList()
+          : [];
+      return lista;
+    } catch (e) {
+      false;
+    }
+    List<Registro> lista = [];
+    return lista;
+  }
+
+  Future<List<Registro>> getRegistrosData(String now, String before) async {
+    Database db = await database;
+    var result = await db.query(
+        '$registroTable WHERE $colData <= "$now%" AND $colData >= "$before" ORDER BY $colData DESC;');
     List<Registro> lista = result.isNotEmpty
         ? result.map((e) => Registro.fromMap(e)).toList()
         : [];
@@ -115,10 +131,8 @@ class DatabaseHelper {
 
   Future<int> updateRegistro(Registro registro) async {
     var db = await database;
-
     var result = await db.update(registroTable, registro.toMap(),
         where: '$colCocho = ?', whereArgs: [registro.cocho]);
-
     return result;
   }
 
