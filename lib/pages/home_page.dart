@@ -42,7 +42,7 @@ class HomePageState extends State<HomePage> {
                 style: ElevatedButton.styleFrom(
                   fixedSize: const Size(300, 50),
                   side: const BorderSide(
-                    width: 5.0,
+                    width: 2.0,
                     color: Colors.white,
                   ),
                   primary: const Color.fromARGB(255, 2, 87, 2),

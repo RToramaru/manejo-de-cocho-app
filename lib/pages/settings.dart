@@ -67,72 +67,85 @@ class SetttingPageState extends State<SetttingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-          margin: const EdgeInsets.all(30),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                if (atualizado) ...[
-                  const SizedBox(
-                    child: CircularProgressIndicator(),
-                    height: 100,
-                    width: 100,
-                  ),
-                ] else ...[
-                  ElevatedButton(
-                    child: const Text(
-                      'Atualizar dados',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 24),
+        body: Column(
+          children: [
+            if (atualizado) ...[
+              Expanded(
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                    margin: const EdgeInsets.only(
+                      top: 0,
                     ),
-                    onPressed: () async {
-                      setState(() {
-                        atualizado = true;
-                      });
-                      try {
-                        for (int i = 0; i < registros.length; i++) {
-                          var r = registros[i].toJson();
-                          ApiHelpers.send(r);
-                        }
-                        db.deleteRegistros();
-                        var response = await ApiHelpers.fetch();
-                        var result = 0;
-                        for (int i = 0; i < response.length; i++) {
-                          var item = response[i] as Map;
-                          String aluno = item['aluno'];
-                          String cocho = item['cocho'];
-                          String quantInicial = item['quant_inicial'];
-                          String quantFinal = item['quant_final'];
-                          String porcentagem = item['porcentagem'];
-                          String data = item['data'];
-
-                          Registro r = Registro(aluno, cocho, quantInicial,
-                              quantFinal, porcentagem, data);
-                          result = await insertRegistro(r);
-
-                          if (result == 1) {
-                            true;
-                          }
-                        }
+                    child: const SizedBox(
+                      child: CircularProgressIndicator(),
+                      height: 100,
+                      width: 100,
+                    ),
+                  ),
+                ),
+              ),
+            ] else ...[
+              Expanded(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    margin: const EdgeInsets.only(
+                      bottom: 20,
+                    ),
+                    child: ElevatedButton(
+                      child: const Text(
+                        'Atualizar dados',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 24),
+                      ),
+                      onPressed: () async {
                         setState(() {
-                          atualizado = false;
-                          _showToast();
+                          atualizado = true;
                         });
-                      } catch (e) {
-                        registros;
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                        fixedSize: const Size(200, 200),
-                        shape: const CircleBorder(),
-                        primary: Colors.green),
-                  )
-                ],
-              ],
-            ),
-          ),
+                        try {
+                          for (int i = 0; i < registros.length; i++) {
+                            var r = registros[i].toJson();
+                            ApiHelpers.send(r);
+                          }
+                          db.deleteRegistros();
+                          var response = await ApiHelpers.fetch();
+                          var result = 0;
+                          for (int i = 0; i < response.length; i++) {
+                            var item = response[i] as Map;
+                            String aluno = item['aluno'];
+                            String cocho = item['cocho'];
+                            String quantInicial = item['quant_inicial'];
+                            String quantFinal = item['quant_final'];
+                            String porcentagem = item['porcentagem'];
+                            String data = item['data'];
+
+                            Registro r = Registro(aluno, cocho, quantInicial,
+                                quantFinal, porcentagem, data);
+                            result = await insertRegistro(r);
+
+                            if (result == 1) {
+                              true;
+                            }
+                          }
+                          setState(() {
+                            atualizado = false;
+                            _showToast();
+                          });
+                        } catch (e) {
+                          registros;
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                          fixedSize: const Size(400, 50),
+                          //shape: const CircleBorder(),
+                          primary: Colors.green),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ],
         ),
         appBar: AppBar(
           title: const Text('Leitura de Cocho'),
