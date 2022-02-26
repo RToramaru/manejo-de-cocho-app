@@ -144,9 +144,9 @@ class HistoryPageState extends State<HistoryPage> {
   }
 
   _escolheCor(int index) {
-    if (double.parse(registros[index].porcentagem) == 0) {
+    if (double.parse(registros[index].porcentagem) <= 5) {
       return const Color.fromARGB(255, 238, 164, 159);
-    } else if (double.parse(registros[index].porcentagem) <= 5) {
+    } else if (double.parse(registros[index].porcentagem) <= 10) {
       return const Color.fromARGB(255, 147, 231, 149);
     } else {
       return const Color.fromARGB(255, 236, 229, 163);
