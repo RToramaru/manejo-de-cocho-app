@@ -32,6 +32,12 @@ class LoginCreatePageState extends State<LoginCreatePage> {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
+                      const Text(
+                        "Usuário ja utilizado",
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                       TextField(
                         onChanged: (nomeText) {
                           nome = nomeText;
@@ -116,13 +122,7 @@ class LoginCreatePageState extends State<LoginCreatePage> {
                             ),
                           ),
                         ),
-                      ),
-                      Text(
-                        "Sucesso",
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      )
+                      ) 
                     ],
                   ),
                 ),

@@ -13,14 +13,12 @@ class CalculatePage extends StatefulWidget {
 }
 
 class CalculatePageState extends State<CalculatePage> {
-  late String aluno;
   late String cocho;
   late String quantInicial;
   late String quantFinal;
   late String porcentagem;
   late String data;
   String text = '';
-  final fieldTextAluno = TextEditingController();
   final fieldTextCocho = TextEditingController();
   final fieldTextInical = TextEditingController();
   final fieldTextFinal = TextEditingController();
@@ -43,7 +41,6 @@ class CalculatePageState extends State<CalculatePage> {
   }
 
   void clearText() {
-    fieldTextAluno.clear();
     fieldTextCocho.clear();
     fieldTextInical.clear();
     fieldTextFinal.clear();
@@ -62,12 +59,12 @@ class CalculatePageState extends State<CalculatePage> {
                 child: Column(
                   children: [
                     TextField(
-                      onChanged: (alunotext) {
-                        aluno = alunotext;
+                      onChanged: (cochoText) {
+                        cocho = cochoText;
                       },
                       keyboardType: TextInputType.text,
                       decoration: InputDecoration(
-                          labelText: 'Tratador',
+                          labelText: 'Identificador',
                           enabledBorder: OutlineInputBorder(
                               borderSide: const BorderSide(
                                   width: 3, color: Colors.blue),
@@ -77,30 +74,7 @@ class CalculatePageState extends State<CalculatePage> {
                                 const BorderSide(width: 3, color: Colors.red),
                             borderRadius: BorderRadius.circular(15),
                           )),
-                      controller: fieldTextAluno,
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(
-                        top: 10,
-                      ),
-                      child: TextField(
-                        onChanged: (cochoText) {
-                          cocho = cochoText;
-                        },
-                        keyboardType: TextInputType.text,
-                        decoration: InputDecoration(
-                            labelText: 'Identificador',
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    width: 3, color: Colors.blue),
-                                borderRadius: BorderRadius.circular(15)),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide:
-                                  const BorderSide(width: 3, color: Colors.red),
-                              borderRadius: BorderRadius.circular(15),
-                            )),
-                        controller: fieldTextCocho,
-                      ),
+                      controller: fieldTextCocho,
                     ),
                     Container(
                       margin: const EdgeInsets.only(
@@ -222,10 +196,10 @@ class CalculatePageState extends State<CalculatePage> {
                             String porcentagem = porcent.toStringAsFixed(2);
                             DateTime d = DateTime.now();
                             data = d.toString();
-                            Registro r = Registro(aluno, cocho, quantInicial,
-                                quantFinal, porcentagem, data);
-                            insertRegistro(r);
-                            clearText();
+                            //Registro r = Registro(aluno, cocho, quantInicial,
+                             //   quantFinal, porcentagem, data);
+                            //insertRegistro(r);
+                            //clearText();
                           },
                           child: const Text('Calcular'),
                           style: ElevatedButton.styleFrom(

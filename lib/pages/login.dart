@@ -30,6 +30,12 @@ class LoginPageState extends State<LoginPage> {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
+                      const Text(
+                        "Usuário ou senha inválidos",
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                       TextField(
                         onChanged: (usuarioText) {
                           usuario = usuarioText;
