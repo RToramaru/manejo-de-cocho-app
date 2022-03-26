@@ -31,6 +31,13 @@ class ListTileCustom extends StatelessWidget {
               Navigator.of(context).pushReplacementNamed('/calculate');
             },
           ),
+           ListTile(
+            leading: const Icon(Icons.home),
+            title: const Text('Adicionar Fazenda'),
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed('/farm');
+            },
+          ),
           ListTile(
             leading: const Icon(Icons.history),
             title: const Text('Registros'),
@@ -57,6 +64,13 @@ class ListTileCustom extends StatelessWidget {
             title: const Text('Gráficos'),
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/graph');
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.picture_as_pdf_outlined),
+            title: const Text('PDF'),
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed('/pdf');
             },
           ),
         ],

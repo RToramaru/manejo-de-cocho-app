@@ -5,7 +5,7 @@ import 'package:draw_graph/models/feature.dart';
 import 'package:flutter/material.dart';
 import 'package:leitura_cocho/helpers/database_helpers.dart';
 import 'package:leitura_cocho/models/registro.dart';
-import 'package:leitura_cocho/pages/list_tile_custom.dart';
+import 'package:leitura_cocho/pages/components/list_tile_custom.dart';
 import 'package:intl/intl.dart';
 import 'package:collection/collection.dart';
 

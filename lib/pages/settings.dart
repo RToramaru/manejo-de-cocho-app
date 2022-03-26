@@ -3,7 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:leitura_cocho/helpers/api_helpers.dart';
 import 'package:leitura_cocho/helpers/database_helpers.dart';
 import 'package:leitura_cocho/models/registro.dart';
-import 'package:leitura_cocho/pages/list_tile_custom.dart';
+import 'package:leitura_cocho/pages/components/list_tile_custom.dart';
 
 class SetttingPage extends StatefulWidget {
   const SetttingPage({Key? key}) : super(key: key);
@@ -90,9 +90,8 @@ class SetttingPageState extends State<SetttingPage> {
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
-                    margin: const EdgeInsets.only(
-                      bottom: 20,
-                    ),
+                    margin:
+                        const EdgeInsets.only(bottom: 20, left: 30, right: 30),
                     child: ElevatedButton(
                       child: const Text(
                         'Atualizar dados',
@@ -108,7 +107,6 @@ class SetttingPageState extends State<SetttingPage> {
                             var r = registros[i].toJson();
                             ApiHelpers.send(r);
                           }
-                          db.deleteRegistros();
                           var response = await ApiHelpers.fetch();
                           var result = 0;
                           for (int i = 0; i < response.length; i++) {
@@ -138,7 +136,9 @@ class SetttingPageState extends State<SetttingPage> {
                       },
                       style: ElevatedButton.styleFrom(
                           fixedSize: const Size(400, 50),
-                          //shape: const CircleBorder(),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18),
+                          ),
                           primary: Colors.green),
                     ),
                   ),
