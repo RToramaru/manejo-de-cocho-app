@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:leitura_cocho/pages/components/list_tile_custom.dart';
+import 'package:leitura_cocho/helpers/database_helpers.dart';
+import 'package:leitura_cocho/models/usuario.dart';
 
 class LoginCreatePage extends StatefulWidget {
   const LoginCreatePage({Key? key}) : super(key: key);
@@ -20,6 +21,8 @@ class LoginCreatePageState extends State<LoginCreatePage> {
   final fieldTextSenha = TextEditingController();
   final fieldTextNome = TextEditingController();
   final fieldTextConfirmar = TextEditingController();
+
+  DatabaseHelper db = DatabaseHelper();
 
   @override
   Widget build(BuildContext context) {
@@ -143,15 +146,22 @@ class LoginCreatePageState extends State<LoginCreatePage> {
                           top: 10,
                         ),
                         child: ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
                             if (senha == confirmar) {
-                              Navigator.of(context)
-                                  .pushReplacementNamed('/login');
-                            }else {
+                              Usuario user = Usuario(nome, usuario, senha);
+                              var result = await db.insertUsuario(user);
+                              if (result == 0) {
+                                setState(() {
+                                  text = "Usuário ja cadastrado";
+                                });
+                              } else {
+                                Navigator.of(context)
+                                    .pushReplacementNamed('/login');
+                              }
+                            } else {
                               setState(() {
                                 text = "As senhas não conferem";
                               });
-                              
                             }
                           },
                           child: const Text('Cadastrar'),

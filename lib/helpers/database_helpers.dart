@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:leitura_cocho/models/usuario.dart';
 import 'package:sqflite/sqflite.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:path_provider/path_provider.dart';
@@ -17,6 +18,11 @@ class DatabaseHelper {
   String colPorcentagem = 'porcentagem';
   String colData = 'data';
 
+  String loginTable = 'login';
+  String colUsuario = 'usuario';
+  String colSenha = 'senha';
+  String colNome = 'nome';
+
   DatabaseHelper._createInstance();
 
   factory DatabaseHelper() {
@@ -31,7 +37,7 @@ class DatabaseHelper {
 
   Future<Database> initializeDatabase() async {
     Directory directory = await getApplicationDocumentsDirectory();
-    String path = directory.path + 'registro.db';
+    String path = directory.path + 'registros.db';
 
     var registrosDatabase =
         await openDatabase(path, version: 1, onCreate: _createDb);
@@ -41,6 +47,8 @@ class DatabaseHelper {
   void _createDb(Database db, int newVersion) async {
     await db.execute(
         'CREATE TABLE IF NOT EXISTS $registroTable($colAluno TEXT, $colCocho TEXT, $colData TEXT, $colQuantInicial TEXT, $colQuantFinal TEXT, $colPorcentagem TEXT, PRIMARY KEY($colAluno, $colCocho, $colData, $colQuantInicial, $colQuantFinal, $colPorcentagem) );');
+    await db.execute(
+        'CREATE TABLE IF NOT EXISTS $loginTable($colUsuario TEXT, $colSenha TEXT, $colNome TEXT, PRIMARY KEY($colUsuario) );');
   }
 
   Future<int> insertRegistro(Registro registro) async {
@@ -51,6 +59,35 @@ class DatabaseHelper {
       // ignore: empty_catches
     } catch (e) {}
     return 0;
+  }
+
+  Future<int> insertUsuario(Usuario usuario) async {
+    try {
+      Database db = await database;
+      var result = await db.insert(loginTable, usuario.toMap());
+      return result;
+      // ignore: empty_catches
+    } catch (e) {}
+    return 0;
+  }
+
+  Future<Usuario?> getUsuario(String login, String senha) async {
+    Database db = await database;
+
+    List<Map> maps = await db.query(loginTable,
+        columns: [
+          colUsuario,
+          colSenha,
+          colNome,
+        ],
+        where: "$colUsuario = ? and $colSenha = ?",
+        whereArgs: [login, senha]);
+
+    if (maps.isNotEmpty) {
+      return Usuario.fromMap(maps.first as Map<String, dynamic>);
+    } else {
+      return null;
+    }
   }
 
   Future<Registro?> getRegistro(String cocho) async {

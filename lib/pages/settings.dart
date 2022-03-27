@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:leitura_cocho/helpers/api_helpers.dart';
+import 'package:leitura_cocho/helpers/api_registro.dart';
 import 'package:leitura_cocho/helpers/database_helpers.dart';
 import 'package:leitura_cocho/models/registro.dart';
 import 'package:leitura_cocho/pages/components/list_tile_custom.dart';
