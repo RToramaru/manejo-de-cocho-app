@@ -4,6 +4,7 @@ import 'package:draw_graph/draw_graph.dart';
 import 'package:draw_graph/models/feature.dart';
 import 'package:flutter/material.dart';
 import 'package:leitura_cocho/helpers/database_helpers.dart';
+import 'package:leitura_cocho/models/fazendaDados.dart';
 import 'package:leitura_cocho/models/registro.dart';
 import 'package:leitura_cocho/pages/components/list_tile_custom.dart';
 import 'package:intl/intl.dart';
@@ -39,7 +40,7 @@ class GraphPageState extends State<GraphPage> {
     DateFormat formatterBefore = DateFormat('yyyy-MM-dd');
     String formattedBefore = formatterBefore.format(before);
 
-    db.getRegistrosData(formattedNow, formattedBefore).then((lista) {
+    db.getRegistrosData(formattedNow, formattedBefore, FazendaDados.atual.nome, FazendaDados.atual.codigo).then((lista) {
       setState(() {
         registros = lista;
         var cochos = [];

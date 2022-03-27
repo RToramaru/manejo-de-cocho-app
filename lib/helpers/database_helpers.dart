@@ -162,6 +162,16 @@ class DatabaseHelper {
     return lista;
   }
 
+    Future<List<Registro>> getRegistrosUsuarios(String fazendaNome, String fazendaCodigo) async {
+    Database db = await database;
+    var result = await db.query('$registroTable WHERE $colFazenda = "$fazendaNome" AND $colFazendaCodigo = "$fazendaCodigo" ORDER BY $colData DESC;');
+
+    List<Registro> lista = result.isNotEmpty
+        ? result.map((e) => Registro.fromMap(e)).toList()
+        : [];
+    return lista;
+  }
+
     Future<List<Usuario>> getUsuarios() async {
     Database db = await database;
     var result = await db.query('$loginTable;');
@@ -216,10 +226,10 @@ class DatabaseHelper {
     return lista;
   }
 
-  Future<List<Registro>> getRegistrosData(String now, String before) async {
+  Future<List<Registro>> getRegistrosData(String now, String before, String fazendaNome, String fazendaCodigo) async {
     Database db = await database;
     var result = await db.query(
-        '$registroTable WHERE $colData <= "$now%" AND $colData >= "$before" ORDER BY $colData DESC;');
+        '$registroTable WHERE $colData <= "$now%" AND $colData >= "$before" AND $colFazenda = "$fazendaNome" AND $colFazendaCodigo = "$fazendaCodigo" ORDER BY $colData DESC;');
     List<Registro> lista = result.isNotEmpty
         ? result.map((e) => Registro.fromMap(e)).toList()
         : [];

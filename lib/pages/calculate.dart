@@ -199,7 +199,7 @@ class CalculatePageState extends State<CalculatePage> {
                             DateTime d = DateTime.now();
                             data = d.toString();
                             Registro r = Registro(UsuarioAtual.nome, cocho, quantInicial,
-                                quantFinal, porcentagem, data, UsuarioAtual.usuario, FazendaDados.atual.nome, FazendaDados.atual.codigo);
+                                quantFinal, porcentagem, data, FazendaDados.atual.nome, UsuarioAtual.usuario, FazendaDados.atual.codigo);
                             insertRegistro(r);
                             clearText();
                           },

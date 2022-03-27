@@ -157,8 +157,8 @@ class SetttingPageState extends State<SetttingPage> {
                                 quantFinal,
                                 porcentagem,
                                 data,
-                                usuario,
                                 fazendaNome,
+                                usuario,
                                 fazendaCodigo);
                             result = await insertRegistro(r);
 
@@ -166,10 +166,6 @@ class SetttingPageState extends State<SetttingPage> {
                               true;
                             }
                           }
-                          setState(() {
-                            atualizado = false;
-                            _showToast();
-                          });
                         } catch (e) {
                           registros;
                         }
@@ -193,10 +189,6 @@ class SetttingPageState extends State<SetttingPage> {
                               true;
                             }
                           }
-                          setState(() {
-                            atualizado = false;
-                            _showToast();
-                          });
                         } catch (e) {
                           registros;
                         }
