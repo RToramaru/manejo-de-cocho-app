@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:leitura_cocho/models/fazendaDados.dart';
 import 'package:leitura_cocho/models/registro.dart';
 import 'package:leitura_cocho/helpers/database_helpers.dart';
+import 'package:leitura_cocho/models/usuarioAtual.dart';
 import 'package:leitura_cocho/pages/components/list_tile_custom.dart';
 
 class CalculatePage extends StatefulWidget {
@@ -196,10 +198,10 @@ class CalculatePageState extends State<CalculatePage> {
                             String porcentagem = porcent.toStringAsFixed(2);
                             DateTime d = DateTime.now();
                             data = d.toString();
-                            //Registro r = Registro(aluno, cocho, quantInicial,
-                             //   quantFinal, porcentagem, data);
-                            //insertRegistro(r);
-                            //clearText();
+                            Registro r = Registro(UsuarioAtual.nome, cocho, quantInicial,
+                                quantFinal, porcentagem, data, UsuarioAtual.usuario, FazendaDados.atual.nome, FazendaDados.atual.codigo);
+                            insertRegistro(r);
+                            clearText();
                           },
                           child: const Text('Calcular'),
                           style: ElevatedButton.styleFrom(

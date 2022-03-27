@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leitura_cocho/pages/farmCreate.dart';
 import 'package:leitura_cocho/pages/login.dart';
 import 'package:leitura_cocho/pages/login_create.dart';
 import 'package:leitura_cocho/pages/pdf.dart';
@@ -27,6 +28,7 @@ class AppWidget extends StatelessWidget {
         '/settings': (context) => const SetttingPage(),
         '/graph': (context) => const GraphPage(),
         '/farm': (context) => const FazendaPage(),
+        '/farmCreate': (context) => const FazendaCreatePage(),
         '/pdf':((context) => const PdfPage()),
         '/login':((context) => const LoginPage()),
         '/register':((context) => const LoginCreatePage()),

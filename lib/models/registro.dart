@@ -5,9 +5,12 @@ class Registro {
   late String quantFinal;
   late String porcentagem;
   late String data;
+  late String fazenda;
+  late String usuario;
+  late String fazendaCodigo;
 
   Registro(this.aluno, this.cocho, this.quantInicial, this.quantFinal,
-      this.porcentagem, this.data);
+      this.porcentagem, this.data, this.fazenda, this.usuario, this.fazendaCodigo);
 
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{
@@ -16,7 +19,10 @@ class Registro {
       'quant_inicial': quantInicial,
       'quant_final': quantFinal,
       'porcentagem': porcentagem,
-      'data': data
+      'data': data,
+      'fazenda':fazenda,
+      'usuario':usuario,
+      'fazendaCodigo':fazendaCodigo,
     };
     return map;
   }
@@ -28,6 +34,9 @@ class Registro {
     quantFinal = map['quant_final'];
     porcentagem = map['porcentagem'];
     data = map['data'];
+    fazenda = map['fazenda'];
+    usuario = map['usuario'];
+    fazendaCodigo = map['fazendaCodigo'];
   }
 
   Registro.fromJson(Map<String, dynamic> json) {
@@ -37,6 +46,9 @@ class Registro {
     quantFinal = json['quant_final'];
     porcentagem = json['porcentagem'];
     data = json['data'];
+    fazenda = json['fazenda'];
+    usuario = json['usuario'];
+    fazendaCodigo = json['fazendaCodigo'];
   }
 
   Map<String, dynamic> toJson() {
@@ -47,6 +59,9 @@ class Registro {
     data['quant_final'] = quantFinal;
     data['porcentagem'] = porcentagem;
     data['data'] = this.data;
+    data['fazenda'] = fazenda;
+    data['usuario'] = usuario;
+    data['fazendaCodigo'] = fazendaCodigo;
     return data;
   }
 }

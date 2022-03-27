@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:leitura_cocho/helpers/database_helpers.dart';
 import 'package:leitura_cocho/models/usuario.dart';
 
@@ -12,6 +13,7 @@ class LoginCreatePage extends StatefulWidget {
 }
 
 class LoginCreatePageState extends State<LoginCreatePage> {
+  late FToast fToast;
   late String usuario;
   late String senha;
   late String confirmar;
@@ -23,6 +25,39 @@ class LoginCreatePageState extends State<LoginCreatePage> {
   final fieldTextConfirmar = TextEditingController();
 
   DatabaseHelper db = DatabaseHelper();
+
+  _showToast() {
+    Widget toast = Container(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25.0),
+        color: const Color.fromARGB(255, 252, 252, 252),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: const [
+          Icon(Icons.check),
+          SizedBox(
+            width: 12.0,
+          ),
+          Text("Usuário cadastrado com sucesso"),
+        ],
+      ),
+    );
+
+    fToast.showToast(
+      child: toast,
+      gravity: ToastGravity.BOTTOM,
+      toastDuration: const Duration(seconds: 2),
+    );
+  }
+
+@override
+void initState() {
+  super.initState();
+    fToast = FToast();
+    fToast.init(context);
+}
 
   @override
   Widget build(BuildContext context) {
@@ -155,6 +190,7 @@ class LoginCreatePageState extends State<LoginCreatePage> {
                                   text = "Usuário ja cadastrado";
                                 });
                               } else {
+                                //_showToast();
                                 Navigator.of(context)
                                     .pushReplacementNamed('/login');
                               }

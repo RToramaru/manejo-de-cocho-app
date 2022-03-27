@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:leitura_cocho/helpers/database_helpers.dart';
+import 'package:leitura_cocho/models/fazenda.dart';
+import 'package:leitura_cocho/models/fazendaDados.dart';
+import 'package:leitura_cocho/models/usuarioAtual.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -11,6 +15,31 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> {
   String valor = 'Selecione...';
+  List<String> opcoes = <String>[];
+  late String codigo;
+
+  DatabaseHelper db = DatabaseHelper();
+  List<Fazenda> fazenda = <Fazenda>[];
+
+  @override
+  void initState() {
+    super.initState();
+
+    db.getFazendaUsuario(UsuarioAtual.usuario).then((lista) {
+      setState(() {
+        fazenda = lista;
+
+        if (fazenda.isEmpty) {
+          Navigator.of(context).pushReplacementNamed('/farmCreate');
+        } else {
+          valor = fazenda[0].nome;
+          for (int c = 0; c < fazenda.length; c++) {
+            opcoes.add(fazenda[c].nome);
+          }
+        }
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,12 +90,8 @@ class HomePageState extends State<HomePage> {
                             valor = novoValor!;
                           });
                         },
-                        items: <String>[
-                          'Selecione...',
-                          'Fazenda 2',
-                          'Fazenda 3',
-                          'Fazenda 4'
-                        ].map<DropdownMenuItem<String>>((String value) {
+                        items: opcoes
+                            .map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
                             child: Center(
@@ -80,6 +105,17 @@ class HomePageState extends State<HomePage> {
                   Center(
                       child: ElevatedButton(
                     onPressed: () {
+                      setState(() {
+                        for (int c = 0; c < fazenda.length; c++) {
+                          if (fazenda[c].nome == valor) {
+                            codigo = fazenda[c].codigo;
+                          }
+                        }
+                        Fazenda f =
+                            Fazenda(valor, codigo, UsuarioAtual.usuario);
+                        FazendaDados.atual = f;
+                        FazendaDados.registros = fazenda;
+                      });
                       Navigator.of(context).pushReplacementNamed('/calculate');
                     },
                     child:

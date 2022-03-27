@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:leitura_cocho/models/fazenda.dart';
 import 'package:leitura_cocho/models/usuario.dart';
 import 'package:sqflite/sqflite.dart';
 // ignore: import_of_legacy_library_into_null_safe
@@ -17,11 +18,18 @@ class DatabaseHelper {
   String colQuantFinal = 'quant_final';
   String colPorcentagem = 'porcentagem';
   String colData = 'data';
+  String colFazendaCodigo = 'fazendaCodigo';
 
   String loginTable = 'login';
   String colUsuario = 'usuario';
   String colSenha = 'senha';
   String colNome = 'nome';
+  String colFazenda = 'fazenda';
+
+  String fazendaTable = 'fazenda';
+  String colFazendaNome = 'nome';
+  String colCodigo = 'codigo';
+
 
   DatabaseHelper._createInstance();
 
@@ -37,7 +45,7 @@ class DatabaseHelper {
 
   Future<Database> initializeDatabase() async {
     Directory directory = await getApplicationDocumentsDirectory();
-    String path = directory.path + 'registros.db';
+    String path = directory.path + 'registro.db';
 
     var registrosDatabase =
         await openDatabase(path, version: 1, onCreate: _createDb);
@@ -46,9 +54,11 @@ class DatabaseHelper {
 
   void _createDb(Database db, int newVersion) async {
     await db.execute(
-        'CREATE TABLE IF NOT EXISTS $registroTable($colAluno TEXT, $colCocho TEXT, $colData TEXT, $colQuantInicial TEXT, $colQuantFinal TEXT, $colPorcentagem TEXT, PRIMARY KEY($colAluno, $colCocho, $colData, $colQuantInicial, $colQuantFinal, $colPorcentagem) );');
+        'CREATE TABLE IF NOT EXISTS $registroTable($colAluno TEXT, $colCocho TEXT, $colData TEXT, $colQuantInicial TEXT, $colQuantFinal TEXT, $colPorcentagem TEXT, $colFazenda TEXT, $colUsuario TEXT, $colFazendaCodigo TEXT, PRIMARY KEY($colAluno, $colCocho, $colData, $colQuantInicial, $colQuantFinal, $colPorcentagem) );');
     await db.execute(
         'CREATE TABLE IF NOT EXISTS $loginTable($colUsuario TEXT, $colSenha TEXT, $colNome TEXT, PRIMARY KEY($colUsuario) );');
+        await db.execute(
+        'CREATE TABLE IF NOT EXISTS $fazendaTable($colFazendaNome TEXT, $colCodigo TEXT, $colUsuario TEXT, PRIMARY KEY($colFazendaNome, $colCodigo, $colUsuario) );');
   }
 
   Future<int> insertRegistro(Registro registro) async {
@@ -65,6 +75,16 @@ class DatabaseHelper {
     try {
       Database db = await database;
       var result = await db.insert(loginTable, usuario.toMap());
+      return result;
+      // ignore: empty_catches
+    } catch (e) {}
+    return 0;
+  }
+
+    Future<int> insertFazenda(Fazenda fazenda) async {
+    try {
+      Database db = await database;
+      var result = await db.insert(fazendaTable, fazenda.toMap());
       return result;
       // ignore: empty_catches
     } catch (e) {}
@@ -101,6 +121,9 @@ class DatabaseHelper {
           colQuantFinal,
           colPorcentagem,
           colData,
+          colFazenda,
+          colUsuario,
+          colFazendaCodigo,
         ],
         where: "$colCocho = ?",
         whereArgs: [cocho]);
@@ -110,6 +133,23 @@ class DatabaseHelper {
     } else {
       return null;
     }
+  }
+
+  Future<List<Fazenda>> getFazendaUsuario(String usuario) async {
+    Database db = await database;
+    var result = await db.query(fazendaTable,
+        columns: [
+          colFazendaNome,
+          colCodigo,
+          colUsuario,
+        ],
+        where: "$colUsuario = ?",
+        whereArgs: [usuario]);
+
+    List<Fazenda> lista = result.isNotEmpty
+        ? result.map((e) => Fazenda.fromMap(e)).toList()
+        : [];
+    return lista;
   }
 
   Future<List<Registro>> getRegistros() async {

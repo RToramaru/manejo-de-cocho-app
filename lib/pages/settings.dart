@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:leitura_cocho/helpers/api_registro.dart';
 import 'package:leitura_cocho/helpers/database_helpers.dart';
+import 'package:leitura_cocho/models/fazendaDados.dart';
 import 'package:leitura_cocho/models/registro.dart';
+import 'package:leitura_cocho/models/usuarioAtual.dart';
 import 'package:leitura_cocho/pages/components/list_tile_custom.dart';
 
 class SetttingPage extends StatefulWidget {
@@ -111,15 +113,14 @@ class SetttingPageState extends State<SetttingPage> {
                           var result = 0;
                           for (int i = 0; i < response.length; i++) {
                             var item = response[i] as Map;
-                            String aluno = item['aluno'];
                             String cocho = item['cocho'];
                             String quantInicial = item['quant_inicial'];
                             String quantFinal = item['quant_final'];
                             String porcentagem = item['porcentagem'];
                             String data = item['data'];
 
-                            Registro r = Registro(aluno, cocho, quantInicial,
-                                quantFinal, porcentagem, data);
+                            Registro r = Registro(UsuarioAtual.nome, cocho, quantInicial,
+                                quantFinal, porcentagem, data, UsuarioAtual.usuario, FazendaDados.atual.nome, FazendaDados.atual.codigo);
                             result = await insertRegistro(r);
 
                             if (result == 1) {
