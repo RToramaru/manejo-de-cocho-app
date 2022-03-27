@@ -162,6 +162,26 @@ class DatabaseHelper {
     return lista;
   }
 
+    Future<List<Usuario>> getUsuarios() async {
+    Database db = await database;
+    var result = await db.query('$loginTable;');
+
+    List<Usuario> lista = result.isNotEmpty
+        ? result.map((e) => Usuario.fromMap(e)).toList()
+        : [];
+    return lista;
+  }
+
+    Future<List<Fazenda>> getFazendas() async {
+    Database db = await database;
+    var result = await db.query('$fazendaTable;');
+
+    List<Fazenda> lista = result.isNotEmpty
+        ? result.map((e) => Fazenda.fromMap(e)).toList()
+        : [];
+    return lista;
+  }
+
   Future<List<Registro>> getRegistrosCocho(String cocho) async {
     Database db = await database;
     try {

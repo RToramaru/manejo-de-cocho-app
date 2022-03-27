@@ -28,6 +28,9 @@ class FazendaCreatePageState extends State<FazendaCreatePage> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
+              Container(margin: const EdgeInsets.only(
+                top: 100
+              ),),
               TextField(
                 onChanged: (codigoText) {
                   codigo = codigoText;
@@ -75,7 +78,7 @@ class FazendaCreatePageState extends State<FazendaCreatePage> {
                     onPressed: () async{
                       Fazenda f = Fazenda(fazenda, codigo, UsuarioAtual.usuario);
                       var result = await db.insertFazenda(f);
-                      //Navigator.of(context).pushReplacementNamed('/home');
+                      Navigator.of(context).pushReplacementNamed('/home');
                     },
                     child: const Text('Cadastrar'),
                     style: ElevatedButton.styleFrom(

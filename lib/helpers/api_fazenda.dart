@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-class ApiHelpers {
+class ApiHelpersFazenda {
   static Future<List> fetch() async {
     var url =
         Uri.parse('https://api-rest-leitura-cocho.herokuapp.com/api/fazendas');
