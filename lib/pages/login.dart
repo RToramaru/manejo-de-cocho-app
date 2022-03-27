@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leitura_cocho/models/usuarioAtual.dart';
 import 'package:leitura_cocho/pages/components/list_tile_custom.dart';
 
 class LoginPage extends StatefulWidget {
@@ -30,11 +31,16 @@ class LoginPageState extends State<LoginPage> {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-                      const Text(
-                        "Usuário ou senha inválidos",
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                      Container(
+                        margin: const EdgeInsets.only(
+                          bottom: 10,
+                        ),
+                        child: const Text(
+                          "Usuário ou senha inválidos",
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                        ),
                       ),
                       TextField(
                         onChanged: (usuarioText) {
@@ -59,6 +65,7 @@ class LoginPageState extends State<LoginPage> {
                           top: 10,
                         ),
                         child: TextField(
+                          obscureText: true,
                           onChanged: (senhaText) {
                             senha = senhaText;
                           },
@@ -86,6 +93,7 @@ class LoginPageState extends State<LoginPage> {
                           child: ElevatedButton(
                             onPressed: () {
                               Navigator.of(context).pushReplacementNamed('/home');
+                              
                             },
                             child: const Text('Acessar'),
                             style: ElevatedButton.styleFrom(
@@ -111,6 +119,9 @@ class LoginPageState extends State<LoginPage> {
                             ),
                             GestureDetector(
                               onTap: () {
+                                setState(() {
+                                UsuarioAtual.nome = "novo";
+                              });
                                 Navigator.of(context).pushReplacementNamed('/register');
                               },
                               child: const Text(
@@ -131,10 +142,6 @@ class LoginPageState extends State<LoginPage> {
             ),
           ],
         )),
-        appBar: AppBar(
-          title: const Center(child: Text('Leitura de Cocho')),
-          backgroundColor: const Color.fromARGB(255, 1, 39, 1),
-        ),
-        drawer: const ListTileCustom());
+        );
   }
 }
