@@ -17,7 +17,6 @@ class HistoryPage extends StatefulWidget {
 class HistoryPageState extends State<HistoryPage> {
   DatabaseHelper db = DatabaseHelper();
   List<Registro> registros = <Registro>[];
-  List<Registro> registrosFazenda = <Registro>[];
 
   @override
   void initState() {
