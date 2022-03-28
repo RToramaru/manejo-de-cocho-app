@@ -147,7 +147,6 @@ class SetttingPageState extends State<SetttingPage> {
                             String data = item['data'];
                             String usuario = item['usuario'];
                             String fazendaNome = item['fazenda'];
-                            String fazendaCodigo = item['fazendaCodigo'];
 
                             Registro r = Registro(
                                 UsuarioAtual.nome,
@@ -157,8 +156,7 @@ class SetttingPageState extends State<SetttingPage> {
                                 porcentagem,
                                 data,
                                 fazendaNome,
-                                usuario,
-                                fazendaCodigo);
+                                usuario);
                             result = await insertRegistro(r);
 
                             if (result == 1) {
