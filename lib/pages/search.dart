@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:leitura_cocho/helpers/database_helpers.dart';
 import 'package:leitura_cocho/models/registro.dart';
 import 'package:leitura_cocho/pages/components/list_tile_custom.dart';
+import 'package:leitura_cocho/models/fazendaDados.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -21,26 +22,41 @@ class SearchPageState extends State<SearchPage> {
 
   Future<bool> pesquisa(String id) async {
     registros = <Registro>[];
-    await db.getRegistrosCocho(id).then((lista) {
-      setState(() {
-        registros = lista;
-        if (registros.isEmpty) {
-          encontrado = false;
-        }
-      });
-    });
-
-    if (registros.isEmpty) {
-      await db.getRegistrosAluno(id).then((lista) {
-        setState(() {
-          registros = lista;
+    await db
+        .getRegistrosCocho(
+            id, FazendaDados.atual.nome, FazendaDados.atual.codigo)
+        .then((lista) async {
+      registros = lista;
+      if (registros.isEmpty) {
+        await db
+            .getRegistrosAluno(
+                id, FazendaDados.atual.nome, FazendaDados.atual.codigo)
+            .then((lista) {
+          setState(() {
+            registros = lista;
+          });
         });
-      });
-    }
-    if (registros.isNotEmpty) {
+
+        if (registros.isEmpty) {
+          setState(() {
+            encontrado = false;
+          });
+        } else {
+          setState(() {
+            encontrado = true;
+          });
+        }
+      } else {
+        setState(() {
+          encontrado = true;
+        });
+      }
+    });
+    if (encontrado) {
       return true;
+    } else {
+      return false;
     }
-    return false;
   }
 
   @override
@@ -222,7 +238,7 @@ class SearchPageState extends State<SearchPage> {
                                 registros[index].porcentagem +
                                 '%',
                             style: const TextStyle(fontSize: 20)),
-                        Text('Data: ' + registros[index].data,
+                        Text('Data: ' + registros[index].data.substring(0,16),
                             style: const TextStyle(fontSize: 20)),
                       ],
                     ))

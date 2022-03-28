@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:leitura_cocho/helpers/database_helpers.dart';
 import 'package:leitura_cocho/models/fazendaDados.dart';
 import 'package:leitura_cocho/models/registro.dart';
-import 'package:leitura_cocho/models/usuarioAtual.dart';
 import 'package:leitura_cocho/pages/components/list_tile_custom.dart';
 
 class HistoryPage extends StatefulWidget {
@@ -78,7 +77,7 @@ class HistoryPageState extends State<HistoryPage> {
                                 registros[index].porcentagem +
                                 '%',
                             style: const TextStyle(fontSize: 20)),
-                        Text('Data: ' + registros[index].data,
+                        Text('Data: ' + registros[index].data.substring(0,16),
                             style: const TextStyle(fontSize: 20)),
                         if (double.parse(registros[index].porcentagem) >= 0 &&
                             double.parse(registros[index].porcentagem) <=
