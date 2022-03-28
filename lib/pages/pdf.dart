@@ -121,7 +121,8 @@ class PdfPageState extends State<PdfPage> {
                   'Abastecimento',
                   'Sobra',
                   'Porcentagem',
-                  'Proximo abasteimento' 'Fazenda',
+                  'Proximo abasteimento',
+                  'Fazenda',
                   'Data'
                 ],
                 for (int c = 0; c < registros.length; c++) ...[
