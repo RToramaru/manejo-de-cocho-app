@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:leitura_cocho/pages/components/list_tile_custom.dart';
+import 'package:leitura_cocho/models/fazenda.dart';
+import 'package:leitura_cocho/models/usuarioAtual.dart';
+import 'package:leitura_cocho/helpers/database_helpers.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class FazendaPage extends StatefulWidget {
   const FazendaPage({Key? key}) : super(key: key);
@@ -11,10 +15,51 @@ class FazendaPage extends StatefulWidget {
 }
 
 class FazendaPageState extends State<FazendaPage> {
+  late FToast fToast;
   late String fazenda;
   late String codigo;
   final fieldFazenda = TextEditingController();
   final fieldCodigo = TextEditingController();
+  DatabaseHelper db = DatabaseHelper();
+
+
+  @override
+  void initState() {
+    super.initState();
+    fToast = FToast();
+    fToast.init(context);
+  }
+
+void clearText() {
+    fieldFazenda.clear();
+    fieldCodigo.clear();
+  }
+
+  _showToast() {
+    Widget toast = Container(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25.0),
+        color: const Color.fromARGB(255, 252, 252, 252),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: const [
+          Icon(Icons.check),
+          SizedBox(
+            width: 12.0,
+          ),
+          Text("Fazenda cadastrada"),
+        ],
+      ),
+    );
+
+    fToast.showToast(
+      child: toast,
+      gravity: ToastGravity.BOTTOM,
+      toastDuration: const Duration(seconds: 2),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,9 +116,12 @@ class FazendaPageState extends State<FazendaPage> {
                       top: 10,
                     ),
                     child: ElevatedButton(
-                      onPressed: () {
-                        setState(() {});
-                      },
+                      onPressed: () async{
+                      Fazenda f = Fazenda(fazenda, codigo, UsuarioAtual.usuario);
+                      var result = await db.insertFazenda(f);
+                      clearText();
+                      _showToast();
+                    },
                       child: const Text('Cadastrar'),
                       style: ElevatedButton.styleFrom(
                         fixedSize: const Size(100, 50),

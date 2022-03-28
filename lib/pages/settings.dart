@@ -5,7 +5,6 @@ import 'package:leitura_cocho/helpers/api_registro.dart';
 import 'package:leitura_cocho/helpers/api_usuario.dart';
 import 'package:leitura_cocho/helpers/database_helpers.dart';
 import 'package:leitura_cocho/models/fazenda.dart';
-import 'package:leitura_cocho/models/fazendaDados.dart';
 import 'package:leitura_cocho/models/registro.dart';
 import 'package:leitura_cocho/models/usuario.dart';
 import 'package:leitura_cocho/models/usuarioAtual.dart';
