@@ -202,7 +202,7 @@ class SetttingPageState extends State<SetttingPage> {
                           var result = 0;
                           for (int i = 0; i < response.length; i++) {
                             var item = response[i] as Map;
-                            String nome = item['noome'];
+                            String nome = item['nome'];
                             String usuario = item['usuario'];
                             String senha = item['senha'];
 

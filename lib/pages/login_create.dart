@@ -190,7 +190,9 @@ void initState() {
                                   text = "Usuário ja cadastrado";
                                 });
                               } else {
-                                //_showToast();
+                                setState(() {
+                                  _showToast();
+                                });
                                 Navigator.of(context)
                                     .pushReplacementNamed('/login');
                               }
