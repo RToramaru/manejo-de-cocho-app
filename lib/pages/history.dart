@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:leitura_cocho/helpers/database_helpers.dart';
 import 'package:leitura_cocho/models/fazendaDados.dart';
 import 'package:leitura_cocho/models/registro.dart';
+import 'package:leitura_cocho/models/usuarioAtual.dart';
 import 'package:leitura_cocho/pages/components/list_tile_custom.dart';
 
 class HistoryPage extends StatefulWidget {
@@ -21,7 +22,7 @@ class HistoryPageState extends State<HistoryPage> {
   void initState() {
     super.initState();
 
-    db.getRegistrosUsuarios(FazendaDados.atual.nome, FazendaDados.atual.codigo).then((lista) {
+    db.getRegistrosUsuarios(FazendaDados.atual.nome, UsuarioAtual.usuario).then((lista) {
       setState(() {
         registros = lista;
       });

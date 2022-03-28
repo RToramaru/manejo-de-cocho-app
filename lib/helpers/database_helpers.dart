@@ -162,9 +162,9 @@ class DatabaseHelper {
     return lista;
   }
 
-    Future<List<Registro>> getRegistrosUsuarios(String fazendaNome, String fazendaCodigo) async {
+    Future<List<Registro>> getRegistrosUsuarios(String fazendaNome, String usuario) async {
     Database db = await database;
-    var result = await db.query('$registroTable WHERE $colFazenda = "$fazendaNome" AND $colFazendaCodigo = "$fazendaCodigo" ORDER BY $colData DESC;');
+    var result = await db.query('$registroTable WHERE $colFazenda = "$fazendaNome" AND $colUsuario = "$usuario" ORDER BY $colData DESC;');
 
     List<Registro> lista = result.isNotEmpty
         ? result.map((e) => Registro.fromMap(e)).toList()
@@ -192,11 +192,11 @@ class DatabaseHelper {
     return lista;
   }
 
-  Future<List<Registro>> getRegistrosCocho(String cocho, String fazendaNome, String fazendaCodigo) async {
+  Future<List<Registro>> getRegistrosCocho(String cocho, String fazendaNome, String usuario) async {
     Database db = await database;
     try {
       var result = await db.query(
-          '$registroTable WHERE $colCocho = $cocho AND $colFazenda = "$fazendaNome" AND $colFazendaCodigo = "$fazendaCodigo" ORDER BY $colData DESC;');
+          '$registroTable WHERE $colCocho = $cocho AND $colFazenda = "$fazendaNome" AND $colUsuario = "$usuario" ORDER BY $colData DESC;');
 
       List<Registro> lista = result.isNotEmpty
           ? result.map((e) => Registro.fromMap(e)).toList()
@@ -209,11 +209,11 @@ class DatabaseHelper {
     return lista;
   }
 
-  Future<List<Registro>> getRegistrosAluno(String aluno, String fazendaNome, String fazendaCodigo) async {
+  Future<List<Registro>> getRegistrosAluno(String aluno, String fazendaNome, String usuario) async {
     Database db = await database;
     try {
       var result = await db.query(
-          '$registroTable WHERE $colAluno = "$aluno" AND $colFazenda = "$fazendaNome" AND $colFazendaCodigo = "$fazendaCodigo" ORDER BY $colData DESC;');
+          '$registroTable WHERE $colAluno = "$aluno" AND $colFazenda = "$fazendaNome" AND $colUsuario = "$usuario" ORDER BY $colData DESC;');
 
       List<Registro> lista = result.isNotEmpty
           ? result.map((e) => Registro.fromMap(e)).toList()

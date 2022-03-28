@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:leitura_cocho/helpers/database_helpers.dart';
 import 'package:leitura_cocho/models/registro.dart';
+import 'package:leitura_cocho/models/usuarioAtual.dart';
 import 'package:leitura_cocho/pages/components/list_tile_custom.dart';
 import 'package:leitura_cocho/models/fazendaDados.dart';
 
@@ -24,13 +25,13 @@ class SearchPageState extends State<SearchPage> {
     registros = <Registro>[];
     await db
         .getRegistrosCocho(
-            id, FazendaDados.atual.nome, FazendaDados.atual.codigo)
+            id, FazendaDados.atual.nome, UsuarioAtual.usuario)
         .then((lista) async {
       registros = lista;
       if (registros.isEmpty) {
         await db
             .getRegistrosAluno(
-                id, FazendaDados.atual.nome, FazendaDados.atual.codigo)
+                id, FazendaDados.atual.nome, UsuarioAtual.usuario)
             .then((lista) {
           setState(() {
             registros = lista;
