@@ -114,29 +114,41 @@ class PdfPageState extends State<PdfPage> {
   Future<Uint8List> buildPdf(PdfPageFormat format) async {
     final pw.Document doc = pw.Document();
     doc.addPage(pw.MultiPage(
+      orientation: pw.PageOrientation.landscape,
         build: (context) => [
-              pw.Table.fromTextArray(data: <List<String>>[
-                <String>[
-                  'Tratador',
-                  'Abastecimento',
-                  'Sobra',
-                  'Porcentagem',
-                  'Proximo abasteimento',
-                  'Fazenda',
-                  'Data'
-                ],
-                for (int c = 0; c < registros.length; c++) ...[
-                  <String>[
-                    registros[c].aluno,
-                    registros[c].quantInicial + ' kg',
-                    registros[c].quantFinal + ' kg',
-                    registros[c].porcentagem + ' %',
-                    abastecimento[c],
-                    registros[c].fazenda,
-                    registros[c].data,
-                  ]
-                ],
-              ])
+              pw.Table.fromTextArray(
+                  data: <List<String>>[
+                    <String>[
+                      'Tratador',
+                      'Abastecimento',
+                      'Sobra',
+                      'Porcentagem',
+                      'Proximo abasteimento',
+                      'Fazenda',
+                      'Data'
+                    ],
+                    for (int c = 0; c < registros.length; c++) ...[
+                      <String>[
+                        registros[c].aluno,
+                        registros[c].quantInicial + ' kg',
+                        registros[c].quantFinal + ' kg',
+                        registros[c].porcentagem + ' %',
+                        abastecimento[c],
+                        registros[c].fazenda,
+                        registros[c].data.substring(0, 16),
+                      ]
+                    ],
+                  ],
+                  cellAlignment: pw.Alignment.center,
+                  columnWidths: {
+                    0: const pw.FlexColumnWidth(15),
+                    1: const pw.FlexColumnWidth(25),
+                    2: const pw.FlexColumnWidth(15),
+                    3: const pw.FlexColumnWidth(25),
+                    4: const pw.FlexColumnWidth(25),
+                    5: const pw.FlexColumnWidth(15),
+                    6: const pw.FlexColumnWidth(15),
+                  })
             ]));
     return await doc.save();
   }
