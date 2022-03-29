@@ -41,7 +41,7 @@ class GraphPageState extends State<GraphPage> {
     DateFormat formatterBefore = DateFormat('yyyy-MM-dd');
     String formattedBefore = formatterBefore.format(before);
 
-    db.getRegistrosData(formattedNow, formattedBefore, FazendaDados.atual.nome, UsuarioAtual.usuario).then((lista) {
+    db.getRegistrosData(formattedNow, formattedBefore, FazendaDados.atual.nome, FazendaDados.atual.codigo).then((lista) {
       setState(() {
         registros = lista;
         var cochos = [];

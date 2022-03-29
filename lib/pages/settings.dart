@@ -140,23 +140,26 @@ class SetttingPageState extends State<SetttingPage> {
                           var result = 0;
                           for (int i = 0; i < response.length; i++) {
                             var item = response[i] as Map;
+                            String aluno = item['aluno'];
                             String cocho = item['cocho'];
                             String quantInicial = item['quant_inicial'];
                             String quantFinal = item['quant_final'];
                             String porcentagem = item['porcentagem'];
                             String data = item['data'];
-                            String usuario = item['usuario'];
                             String fazendaNome = item['fazenda'];
+                            String usuario = item['usuario'];
+                            String fazendaCodigo = item['fazenda_codigo'];
 
                             Registro r = Registro(
-                                UsuarioAtual.nome,
+                                aluno,
                                 cocho,
                                 quantInicial,
                                 quantFinal,
                                 porcentagem,
                                 data,
                                 fazendaNome,
-                                usuario);
+                                usuario,
+                                fazendaCodigo);
                             result = await insertRegistro(r);
 
                             if (result == 1) {

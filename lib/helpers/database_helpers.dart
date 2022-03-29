@@ -18,7 +18,7 @@ class DatabaseHelper {
   String colQuantFinal = 'quant_final';
   String colPorcentagem = 'porcentagem';
   String colData = 'data';
-  String colFazendaCodigo = 'fazendaCodigo';
+  String colFazendaCodigo = 'fazenda_codigo';
 
   String loginTable = 'login';
   String colUsuario = 'usuario';
@@ -45,7 +45,7 @@ class DatabaseHelper {
 
   Future<Database> initializeDatabase() async {
     Directory directory = await getApplicationDocumentsDirectory();
-    String path = directory.path + 'registro.db';
+    String path = directory.path + 'registros.db';
 
     var registrosDatabase =
         await openDatabase(path, version: 1, onCreate: _createDb);
@@ -54,7 +54,7 @@ class DatabaseHelper {
 
   void _createDb(Database db, int newVersion) async {
     await db.execute(
-        'CREATE TABLE IF NOT EXISTS $registroTable($colAluno TEXT, $colCocho TEXT, $colData TEXT, $colQuantInicial TEXT, $colQuantFinal TEXT, $colPorcentagem TEXT, $colFazenda TEXT, $colUsuario TEXT, PRIMARY KEY($colAluno, $colCocho, $colData, $colQuantInicial, $colQuantFinal, $colPorcentagem) );');
+        'CREATE TABLE IF NOT EXISTS $registroTable($colAluno TEXT, $colCocho TEXT, $colData TEXT, $colQuantInicial TEXT, $colQuantFinal TEXT, $colPorcentagem TEXT, $colFazenda TEXT, $colUsuario TEXT, $colFazendaCodigo TEXT, PRIMARY KEY($colAluno, $colCocho, $colData, $colQuantInicial, $colQuantFinal, $colPorcentagem) );');
     await db.execute(
         'CREATE TABLE IF NOT EXISTS $loginTable($colUsuario TEXT, $colSenha TEXT, $colNome TEXT, PRIMARY KEY($colUsuario) );');
         await db.execute(
@@ -162,9 +162,9 @@ class DatabaseHelper {
     return lista;
   }
 
-    Future<List<Registro>> getRegistrosUsuarios(String fazendaNome, String usuario) async {
+    Future<List<Registro>> getRegistrosUsuarios(String fazendaNome, String fazendaCodigo) async {
     Database db = await database;
-    var result = await db.query('$registroTable WHERE $colFazenda = "$fazendaNome" AND $colUsuario = "$usuario" ORDER BY $colData DESC;');
+    var result = await db.query('$registroTable WHERE $colFazenda = "$fazendaNome" AND $colFazendaCodigo = "$fazendaCodigo" ORDER BY $colData DESC;');
 
     List<Registro> lista = result.isNotEmpty
         ? result.map((e) => Registro.fromMap(e)).toList()
@@ -192,11 +192,11 @@ class DatabaseHelper {
     return lista;
   }
 
-  Future<List<Registro>> getRegistrosCocho(String cocho, String fazendaNome, String usuario) async {
+  Future<List<Registro>> getRegistrosCocho(String cocho, String fazendaNome, String fazendaCodigo) async {
     Database db = await database;
     try {
       var result = await db.query(
-          '$registroTable WHERE $colCocho = $cocho AND $colFazenda = "$fazendaNome" AND $colUsuario = "$usuario" ORDER BY $colData DESC;');
+          '$registroTable WHERE $colCocho = $cocho AND $colFazenda = "$fazendaNome" AND $colFazendaCodigo = "$fazendaCodigo" ORDER BY $colData DESC;');
 
       List<Registro> lista = result.isNotEmpty
           ? result.map((e) => Registro.fromMap(e)).toList()
@@ -209,11 +209,11 @@ class DatabaseHelper {
     return lista;
   }
 
-  Future<List<Registro>> getRegistrosAluno(String aluno, String fazendaNome, String usuario) async {
+  Future<List<Registro>> getRegistrosAluno(String aluno, String fazendaNome, String fazendaCodigo) async {
     Database db = await database;
     try {
       var result = await db.query(
-          '$registroTable WHERE $colFazenda = "$fazendaNome" AND $colUsuario = "$usuario" ORDER BY $colData DESC;');
+          '$registroTable WHERE $colFazenda = "$fazendaNome" AND $colFazendaCodigo = "$fazendaCodigo" ORDER BY $colData DESC;');
 
       List<Registro> lista = result.isNotEmpty
           ? result.map((e) => Registro.fromMap(e)).toList()
@@ -226,10 +226,10 @@ class DatabaseHelper {
     return lista;
   }
 
-  Future<List<Registro>> getRegistrosData(String now, String before, String fazendaNome, String usuario) async {
+  Future<List<Registro>> getRegistrosData(String now, String before, String fazendaNome, String fazendaCodigo) async {
     Database db = await database;
     var result = await db.query(
-        '$registroTable WHERE $colData <= "$now%" AND $colData >= "$before" AND $colFazenda = "$fazendaNome" AND $colUsuario = "$usuario" ORDER BY $colData DESC;');
+        '$registroTable WHERE $colData <= "$now%" AND $colData >= "$before" AND $colFazenda = "$fazendaNome" AND $colFazendaCodigo = "$fazendaCodigo" ORDER BY $colData DESC;');
     List<Registro> lista = result.isNotEmpty
         ? result.map((e) => Registro.fromMap(e)).toList()
         : [];

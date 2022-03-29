@@ -22,7 +22,7 @@ class HistoryPageState extends State<HistoryPage> {
   void initState() {
     super.initState();
 
-    db.getRegistrosUsuarios(FazendaDados.atual.nome, UsuarioAtual.usuario).then((lista) {
+    db.getRegistrosUsuarios(FazendaDados.atual.nome, FazendaDados.atual.codigo).then((lista) {
       setState(() {
         registros = lista;
       });
