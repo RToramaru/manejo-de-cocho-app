@@ -40,4 +40,5 @@ Após assinado caso desaja salvar os dados em um servidor é necessário adicion
 
 ## Desenvolvedores
 Luana Ataide Castro https://github.com/luanaacastro
+
 Rafael Almeida Soares https://github.com/RToramaru
