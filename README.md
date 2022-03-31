@@ -37,6 +37,8 @@ Para utilizar o aplicativo é necessário adicionar um arquivo assinado key.prop
 
 Após assinado caso desaja salvar os dados em um servidor é necessário adicionar os acesso as API nos arquivos helpers, se encontrando na pasta lib/helpers/ 
 
+Os modelos do API podem ser encontrados no link https://github.com/RToramaru/api-app
+
 
 ## Desenvolvedores
 Luana Ataide Castro https://github.com/luanaacastro
