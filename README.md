@@ -27,7 +27,7 @@ Para instalação primeiramente clone o repositório local, em seguida abra o di
 
 ```sh
 git clone https://github.com/RToramaru/manejo-de-cocho-app
-cd flutter-app
+cd manejo-de-cocho-app
 flutter pub get
 ```
 
