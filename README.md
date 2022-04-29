@@ -26,7 +26,7 @@ Além dessas funcionalidades o aplicativo armazena os dados localmente e em serv
 Para instalação primeiramente clone o repositório local, em seguida abra o diretório salvo e instale as dependências
 
 ```sh
-git clone https://github.com/RToramaru/flutter-app
+git clone https://github.com/RToramaru/manejo-de-cocho-app
 cd flutter-app
 flutter pub get
 ```
