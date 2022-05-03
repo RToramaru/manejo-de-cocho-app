@@ -44,3 +44,4 @@ Os modelos da API podem ser encontrados no link https://github.com/RToramaru/api
 Luana Ataide Castro https://github.com/luanaacastro
 
 Rafael Almeida Soares https://github.com/RToramaru
+
