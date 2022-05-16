@@ -47,4 +47,4 @@ Rafael Almeida Soares https://github.com/RToramaru
 
 ## Demonstração
 
-![](https://github.com/RToramaru/clima-app/blob/main/screen/demonstracao.gif)
+![](/screen/demonstracao.gif)
